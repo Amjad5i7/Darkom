@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+
+<style>
+
+  .product {
+    float: left;
+    width: 27%;
+    border-radius: 2%;
+    margin: 1%;
+  }
+
+  .product:hover {
+    box-shadow: 1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);  
+    -moz-box-shadow:    1.5px 1.5px 2.5px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .image-box {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 2% 2% 0 0;
+  }
+
+  .images {
+    height: 15em;
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    border-radius: 2% 2% 0 0;
+    transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+  }
+
+  .images:hover {
+    transform: scale(1.2);
+    overflow: hidden;
+    border-radius: 2%;
+  }
+
+
+  #image-1 {background-image: url("https://image.arrivalguides.com/x/11/78a1811c20eb65c0f0586878315f9a6a.jpg");}
+  #image-2 {background-image: url("https://s1.wklcdn.com/image_154/4633209/46968300/30972475Master.jpg");}
+  
+ .text-box{
+  font-size: 1px;
+  color:black
+ }
+
+
+
+
+
+
+
+  </style>
+  <body >
+    <header>
+      <%- include('../partials/headerLogin'); %>
+    </header>
+         
+
+    <!-- NAVBAR FOR ACCOUNT SETTINGS -->
+    <div class="row"> 
+      <ul class="nav  nav-tabs justify-content-center" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#acc">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#res">Past Reservation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#pay">Payment</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#prof">Profile</a>
+        </li>
+      </ul>
+      
+      
+      <div class="tab-content" id="tabContent">
+        <!-- Profiles settings -->
+        <div class="container tab-pane active" id="acc" role="tabpanel" style="width:40%"> 
+          <div class="container p-5 my-9 ">
+            <form class="profileForm">
+              <label for="fname">First name:</label><br>
+              <p type="text" id="fname" name="fname"> </p> <br> <!-- get first name from database -->
+              <label for="fname">Last name:</label><br>
+              <p type="text" id="fname" name="fname"> </p> <br> <!-- get last name from database -->
+              <label for="email">Email Addrress:</label><br>
+              <p type="text" id="email" name="email"> </p><!-- get email from database -->
+            </form>
+          </div> 
+
+        </div><br>
+        <!-- Past Reservation -->
+        <div class="tab-pane fade" id="res" role="tabpanel"  >
+
+          <div class="container p-5 my-5 ">
+            <div class="row">
+            <div class="col-3">
+              <div class="card mb-4" style="width: 18rem;">
+                  <img src="https://source.unsplash.com/random/200x180?sig=5" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <h5 class="card-title" class="activity_name">Activity name</h5>
+
+                      <p class="card-text" style="color:black;" class="price">Price:</p>
+                      <p class="card-text" style="color:black;" class="price">/</p>
+
+                      <p class="card-text" style="color:black;" class="num_people">Number of People:</p>
+                      <p class="card-text" style="color:black;" class="num_people">/</p>
+
+                      <p class="card-text" style="color:black;" class="city">City:</p>
+                      <p class="card-text" style="color:black;" class="city">/</p>
+
+                      <p class="card-text" style="color:black;" class="reserve_date">Date:</p>
+                      <p class="card-text" style="color:black;" class="reserve_date">/</p>
+                      </div>
+                  </div>
+              </div>
+
+
+              <div class="col-3">
+                <div class="card mb-4" style="width: 18rem;">
+                    <img src="https://source.unsplash.com/random/200x180?sig=5" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" class="activity_name">Activity name</h5>
+  
+                        <p class="card-text" style="color:black;" class="price">Price:</p>
+                        <p class="card-text" style="color:black;" class="price">/</p>
+  
+                        <p class="card-text" style="color:black;" class="num_people">Number of People:</p>
+                        <p class="card-text" style="color:black;" class="num_people">/</p>
+  
+                        <p class="card-text" style="color:black;" class="city">City:</p>
+                        <p class="card-text" style="color:black;" class="city">/</p>
+  
+                        <p class="card-text" style="color:black;" class="reserve_date">Date:</p>
+                        <p class="card-text" style="color:black;" class="reserve_date">/</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                  <div class="card mb-4" style="width: 18rem;">
+                      <img src="https://source.unsplash.com/random/200x180?sig=5" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title" class="activity_name">Activity name</h5>
+    
+                          <p class="card-text" style="color:black;" class="price">Price:</p>
+                          <p class="card-text" style="color:black;" class="price">/</p>
+    
+                          <p class="card-text" style="color:black;" class="num_people">Number of People:</p>
+                          <p class="card-text" style="color:black;" class="num_people">/</p>
+    
+                          <p class="card-text" style="color:black;" class="city">City:</p>
+                          <p class="card-text" style="color:black;" class="city">/</p>
+    
+                          <p class="card-text" style="color:black;" class="reserve_date">Date:</p>
+                          <p class="card-text" style="color:black;" class="reserve_date">/</p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="card mb-4" style="width: 18rem;">
+                        <img src="https://source.unsplash.com/random/200x180?sig=5" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" class="activity_name">Activity name</h5>
+      
+                            <p class="card-text" style="color:black;" class="price">Price:</p>
+                            <p class="card-text" style="color:black;" class="price">/</p>
+      
+                            <p class="card-text" style="color:black;" class="num_people">Number of People:</p>
+                            <p class="card-text" style="color:black;" class="num_people">/</p>
+      
+                            <p class="card-text" style="color:black;" class="city">City:</p>
+                            <p class="card-text" style="color:black;" class="city">/</p>
+      
+                            <p class="card-text" style="color:black;" class="reserve_date">Date:</p>
+                            <p class="card-text" style="color:black;" class="reserve_date">/</p>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          </div>  
+        </div>
+        <!--End Past Reservations-->
+
+
+        
+        <!-- Payment-->
+        <div class="tab-pane fade" id="pay" role="tabpanel" >
+          <div class="creditCardForm">
+            <div class="heading">
+              <h1> Payment Reciving Method </h1>
+            </div>
+            <div class="payment">
+              <form>
+                <div class="form-group owner">
+                  <label for="owner">Name Of Account Owner</label>
+                  <input type="text" class="form-control" id="owner"> <!--Post to data base for later use-->
+                </div>
+                <div class="form-group" id="card-number-field">
+                  <label for="cardNumber">Account Number Or IBAN </label> <!--Post to data base for later use-->
+                  <input type="text" class="form-control" id="cardNumber">
+                </div>  
+                <div class="form-group" id="pay-now">
+                  <button type="submit" class="btn btnForm" id="confirm-purchase">Save Payment Info</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Public profile -->
+        <div class="container mt-5 tab-pane fade" id="prof" role="tabpanel" style="width:800px">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+              <div class="profileCard p-3 py-4">
+                
+                <div class="text-center" id="profile_pic">
+                  <img src="/images/profile_pic.jpeg" width="100" class="rounded-circle" id="output">
+                </div>
+                
+                <div class="text-center mt-3">
+                  <span class="bg-secondary p-1 px-4 rounded text-white">Service Provider</span>
+                  <h5 class="mt-2 mb-0">Ahmad Abdullah</h5>
+                  <span>Riyadh</span><br>
+                  <span class="contact" style="color: #4c4e56;">WhatsApp link:</span>
+                  <div class="px-4 mt-1">
+                    <p class="fonts" style="color: #4c4e56;">Bio</p>
+                  </div>
+                  
+                  <div class="buttons" data-toggle="modal" data-target="#edit_prof">
+                    <button class="btn btnForm px-4 ms-3" style="background-color: #4c4e56; width: 30%;">Edit</button>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+        </div><br><br><br>
+
+
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="edit_prof">
+          <div class="modal-dialog justify-content-center">
+            <div class="modal-content">
+              <div class="modal-body" style="border: none;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="border: none; background-color: white;">&times;</button>
+                
+               
+                  
+                    <div class="profileCard p-3 py-4">
+                    <form> 
+                      <div class="text-center">
+                        <label class="-label" for="file">
+                          <span>Change Image</span>
+                        </label>
+                        <input id="file" type="file" onchange="loadFile(event)" >
+                        <img src="/images/avatar_default.jpeg" id="output_pic" width="200"  class="rounded-circle">
+                      </div>
+                      
+                      <div class="text-center mt-3">
+                        <input type="text" id="fulName" name="fulName" placeholder="full name"><br>
+                        <input type="text" id="city" name="city" placeholder="city"><br>
+                        <input type="url" id="whatsapp" name="whatsapp" placeholder="enter your whatsApp link"><br>
+                        <input type="text" id="bio" name="bio" placeholder="Bio"><br><br>
+                        
+                        <div class="buttons">
+                          <button class="btn btnForm px-4 ms-3">Save changes</button>
+                        </div>
+                      </div>
+
+                    </form> 
+                    </div>
+               
+               
+              </div>
+            </div>
+          </div>
+        </div><br><br><br>
+
+          
+
+
+      </div>
+
+    </div>
+
+    
+<!--script for change profile pic-->
+<script>
+  var loadFile = function (event) {
+  var image = document.getElementById("output_pic");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+
+</script>
+
+
+		<!-- START FOOTER -->
+		<footer>
+      <%- include('../partials/footer'); %>
+
+		</footer>
+		<!-- END FOOTER -->
+          
+  </body>
+</html>

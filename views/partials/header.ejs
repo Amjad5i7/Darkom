@@ -1,0 +1,68 @@
+<!-- NAVIGATION -->
+<div class="navbar navbar-light navbar-expand-lg ">
+			
+    <div class="container">
+      <!--LOGO-->
+      <a class="navbar-brand" href="/">
+        <img id="logo" src="http://127.0.0.1:3112/images/darkom_logo-04.jpg" alt="image of logo">
+      </a>
+
+      <!-- RESPONSIVE NAVBAR -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!--START NAVBAR | MAIN MANUE-->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        
+        <ul class="navbar-nav mx-auto ">
+                
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+                  
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+                  
+          <li class="nav-item">
+            <a class="nav-link" href="/services">Services</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/faq">FAQ</a>
+          </li>
+                  
+
+        </ul>
+
+        <!-- REDISTRATION NAVBAR-->
+        <ul class="nav navbar-nav navbar-right" id="right-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/login" style="margin-right:0;">Login</a>
+          </li>
+                    
+          <li class="nav-item">
+            <a class="nav-link" href="/registration">Sign up</a>
+          </li>
+
+        </ul>
+                
+      </div>
+              
+    </div>
+              
+  </div>
+  <!-- END NAVIGATION -->
+  <script>
+  $(document).ready(function() {
+    $( "#logo" ).mouseover(function(){
+        $(this).attr("src", "http://127.0.0.1:3112/images/darkom_logo-04.jpg");
+    });
+
+    $( "#logo" ).mouseout(function(){
+        $(this).attr("src", "http://127.0.0.1:3112/images/darkom_logo-04.jpg");
+    });
+});
+</script>

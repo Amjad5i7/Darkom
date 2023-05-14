@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body>
+
+  <header>
+    <% if (loggedIn) { %>
+        <%- include('../partials/headerLogin'); %>
+     <% } else { %>
+        <%- include('../partials/header'); %>
+     <% } %>
+</header>
+<!--START FIRST SECTION -->
+
+
+<!--CARDS BAR SUBMARK  -->
+<div class="rowSubmark">
+  <div class="columnSubmark 1" >
+      <img src="images/alt_logo-08.png" width="100px">
+  </div>
+  <div class="columnSubmark 2" >
+      <img src="images/alt_logo-09.png" width="100px">
+  </div>	
+  <div class="columnSubmark 3" >
+      <img src="images/alt_logo-10.png" width="100px">
+  </div>
+  <div class="columnSubmark 4" >
+      <img src="images/alt_logo-11.png" width="100px">
+  </div>
+  <div class="columnSubmark 5" >
+      <img src="images/alt_logo-12.png" width="100px">
+  </div>
+  <div class="columnSubmark 6" >
+      <img src="images/alt_logo-13.png" width="100px">
+  </div>
+</div>
+<!--END CARDS BAR SUBMARK -->
+
+<br>
+<div class="About_section" id="About_section">
+  
+  <div class="container">
+    <div class="row">
+      <h1 id="faq">FAQ</h1><br><br><br><br>
+                
+      <div class="col-1"></div>
+       <div class="col-md-10">
+
+          <h5 id="questions"> Can I register as a Service Provider? </h5>
+          <p id="answers"> Any Saudi citizen can easily register as a Service Provider and provide their different types of service, either a plan or an activity.</p>
+
+          <br>
+          <h5 id="questions"> How can I add my Service on Darkom website? </h5>
+          <p id="answers"> You can add a service as a Service Provider from the <a href="/services">Services</a> section, and click on the plus sign in the right bottom corner to add your service.</p>
+
+          <br>
+          <h5 id="questions"> How would I receive the money from my clients? </h5>
+          <p id="answers"> Darkom will take its percentage from the total revenue, and tranfer the money at the end of each month.</p>
+          
+          <br>
+          <h5 id="questions"> What is the difference between a plan or an activity? </h5>
+          <p id="answers"> An activity is a single activity that is done in a part of the day, while as a plan is set of activities that is for the whole day, which may include breakfast, dinner, etc.. </p>
+
+          <br>
+          <h5 id="questions"> Can I register as both a visitor or a service provider? </h5>
+          <p id="answers"> You may register for both, but you can only use one email for each user and two different phone numbers, which means you'll need two diffrent emails and two diffrent phone numbers.</p>
+
+          <br>
+          <h5 id="questions"> Can I cancle any reservation? </h5>
+          <p id="answers"> At the current time, you won't be able to cancle any reservation after making the payment. But you may try reaching to the Service Provider via whats app and ask for cancellation.</p>
+
+          <br>
+          <h5 id="questions"> Can I delete some services that I'm not providing any more? </h5>
+          <p id="answers"> Yes of course, you may do that by going to the <a href="/services">Services</a> section, and click on the delete button on the service that you want to delete. </p>
+
+          <br>
+          <h5 id="questions"> Can I edit a service that was added previously? </h5>
+          <p id="answers"> At the current time, you won't be able to edit any service, but you may delete the service and add it again with the modified changes.</p>
+
+          </div>
+
+        </div>
+        </div>
+
+    </div>
+              
+  </div>
+
+</div>
+<br><br><br><br>
+
+
+<!-- END FIRST SECTION -->
+
+  <!--FOOTER SECTION-->
+  <%- include('../partials/footer'); %>
+
+
+</body>
+</html>

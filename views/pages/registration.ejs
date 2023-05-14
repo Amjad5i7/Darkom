@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+
+
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+      
+    </header>
+    <!--START REGISTRATION SECTION-->
+    <div class="container mt-4">
+        <div class="row">
+            <h2 class="text-center">
+                Register
+            </h2>
+        </div>
+    </div>
+
+    <!-- CHOOSE ROLE OPTION -->
+    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+
+            <li  class="nav-item" role="presentation">
+                <button class="nav-link active" id="reg-v-tab" data-toggle="tab" data-target="#reg-v" type="button" role="tab" aria-controls="reg-v" aria-selected="true">Visitor</button>
+            </li>
+        <li class="nav-item" role="presentation">
+
+                <button class="nav-link" id="reg-sp-tab" data-toggle="tab" data-target="#reg-sp" type="button"
+                    role="tab" aria-controls="reg-sp" aria-selected="false">Service Provider</button>
+        </li>
+    </ul>
+
+    <!-- START SIGN UP / REGISTRATION FORM -->
+    <div class="tab-content" id="myTabContent">
+
+        <!-- VISITOR REGISTRATION -->
+        <div class="tab-pane fade show active" id="reg-v" role="tabpanel" aria-labelledby="reg-v-tab">
+            <div class="container">
+                <div class="row p-4">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+
+
+                        <form id="visitorRegister">
+
+                            <div class="mb-3">
+
+                                <input type="hidden" name="user_type" class="form-control" id="provider"
+                                    value="visitor" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="f_name" class="form-label">First Name</label>
+                                <input type="text" name="firstName" class="form-control" id="f_name"
+                                    placeholder="First Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="l_name" class="form-label">Last Name</label>
+                                <input type="text" name="lastName" class="form-control" id="l_name"
+                                    placeholder="Last Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    placeholder="YourEmail@mail.com" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="mobile" class="form-label">Mobile</label>
+                                <input type="text" name="phoneNumber" class="form-control" id="mobile"
+                                    placeholder="+966555555555" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Date Of Birth</label>
+                                <input type="date" name="dob" class="form-control" id="date_of_birth"
+                                    placeholder="1 / 1 / 2023" required>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="*********" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" name="confirm_password" class="form-control"
+                                    id="confirm_password" placeholder="*********" required>
+                            </div>
+
+                            <p class="para-2">Already have an account? <a href="/login" style="color: #DA9D6F;">Login
+                                    here</a></p>
+                            
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" id="visitorRegisterBtn" class="btnForm">Sign Up</button>
+                              </div>
+
+                        </form>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICE PROVIDER REGISTRATION -->
+        <div class="tab-pane fade" id="reg-sp" role="tabpanel" aria-labelledby="reg-sp-tab">
+          
+            <div class="container">
+                <div class="row p-4">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <form id="serviceProviderRegister">
+
+                            <div class="mb-3">
+
+                                <input type="hidden" name="user_type" class="form-control" id="provider"
+                                    value="service_provider" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="f_name" class="form-label">First Name</label>
+                                <input type="text" name="firstName" class="form-control" id="f_name"
+                                    placeholder="First Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="l_name" class="form-label">Last Name</label>
+                                <input type="text" name="lastName" class="form-control" id="l_name"
+                                    placeholder="Last Name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" name="email" class="form-control" id="email"
+                                    placeholder="YourEmail@mail.com" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="mobile" class="form-label">Mobile</label>
+                                <input type="text" name="phoneNumber" class="form-control" id="mobile"
+                                    placeholder="+966555555555" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Date Of Birth</label>
+                                <input type="date" name="dob" class="form-control" id="date_of_birth"
+                                    placeholder="1 / 1 / 2023" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" id="address"
+                                    placeholder="Address" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="national_id" class="form-label">National Id</label>
+                                <input type="text" name="national_id" class="form-control" id="national_id"
+                                    placeholder="1100000000" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="*********" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" name="confirm_password" class="form-control"
+                                    id="confirm_password" placeholder="*********" required>
+                            </div>
+
+                            <p class="para-2">Already have an account? <a href="/login" style="color: #DA9D6F;">Login
+                                    here</a></p>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btnForm">Sign Up</button>
+                                    </div>
+                            
+                        </form>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END START REGISTRATION SECTION-->
+
+    <script>
+        // visitorRegister
+        document.getElementById("visitorRegister").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+
+      var form = event.target;
+      var formData = new FormData(form);
+
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+      var reqData = JSON.stringify(jsonData)
+      console.log("jsonData",jsonData);
+      if (jsonData.password != jsonData.confirm_password) {
+        Swal.fire({
+        title: 'Error!',
+        text: 'Passsword and confirm-password doesnot match',
+        icon: 'error',
+        confirmButtonText: 'OK'
+        })
+        return;
+      }
+      $.ajax({
+        url: '/api/registration',
+        type: 'post',
+        data: jsonData,
+        success: function(data){ 
+          console.log("response",data)
+          if (data.success) {
+            Swal.fire(
+            'You have registered!',
+            data.message,
+            'success'
+            )
+
+            window.location.href = "/login";
+
+          } else {
+            Swal.fire({
+            title: 'Error!',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+
+            console.log("response_data",data.response_data)
+          }
+        }
+      });
+
+    });
+    document.getElementById("serviceProviderRegister").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+
+      var form = event.target;
+      var formData = new FormData(form);
+
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+      var reqData = JSON.stringify(jsonData)
+      console.log("jsonData",jsonData);
+      if (jsonData.password != jsonData.confirm_password) {
+        Swal.fire({
+        title: 'Error!',
+        text: 'Passsword and confirm-password doesnot match',
+        icon: 'error',
+        confirmButtonText: 'OK'
+        })
+        return;
+      }
+      $.ajax({
+        url: '/api/registration',
+        type: 'post',
+        data: jsonData,
+        success: function(data){ 
+          console.log("response",data)
+          if (data.success) {
+            Swal.fire(
+            'You have registered!',
+            data.message,
+            'success'
+            )
+            window.location.href = "/login";
+
+          } else {
+            Swal.fire({
+            title: 'Error!',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+
+            console.log("response_data",data.response_data)
+          }
+        }
+      });
+
+    });
+       
+    </script>
+
+
+        <%- include('../partials/footer'); %>
+
+
+</body>
+
+</html>

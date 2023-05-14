@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+
+</head>
+
+<body class="login-page">
+
+  <header>
+    <% if (loggedIn) { %>
+        <%- include('../partials/headerLogin'); %>
+     <% } else { %>
+        <%- include('../partials/header'); %>
+     <% } %>
+  
+</header>
+  <!--START LOGIN SECTION-->
+  <div class="container mt-4">
+    <div class="row">
+      <h2 class="text-center">
+        Login
+      </h2>
+    </div>
+  </div>
+
+  <!-- CHOOSE ROLE OPTION -->
+  <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="login-v-tab" data-toggle="tab" data-target="#login-v" type="button"
+        role="tab" aria-controls="login-v" aria-selected="true">Visitor</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="login-sp-tab" data-toggle="tab"  data-target="#login-sp" type="button"
+        role="tab" aria-controls="login-sp" aria-selected="false">Service Provider</button>
+    </li>
+  </ul>
+
+
+  <!-- START LOGIN FORM -->
+  <div class="tab-content" id="myTabContent">
+
+    <!-- VISITOR LOGIN -->
+    <div class="tab-pane fade show active" id="login-v" role="tabpanel" aria-labelledby="login-v-tab">
+      <div class="container">
+        <div class="row p-4">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <form id="loginformvisitor">
+              <!--<div class="mb-3">
+
+              </div>-->
+              <div class="mb-3">
+                <input type="hidden" name="user_type" class="form-control" id="user_type" value="visitor">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="YouEmail@mail.com" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="*********" required>
+              </div>
+              <p class="para-2">Forget Password? <a href="/forgot-password-one" style="color: #DA9D6F;">reset here</a>
+              </p>
+              <div class="d-flex justify-content-end">
+                <button type="submit" name="sbumit" class="btnForm">Login</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE PROVIDER LOGIN -->
+    <div class="tab-pane fade" id="login-sp" role="tabpanel" aria-labelledby="login-sp-tab">
+
+      <div class="container">
+        <div class="row p-4">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <form id="loginformserviceprovider" >
+              <div class="mb-3">
+                <input type="hidden" name="user_type" class="form-control" id="user_type" value="service_provider">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="email" class="form-control" id="email" placeholder="YourEmail@mail.com">
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="*********">
+              </div>
+              <p class="para-2">Forget Password? <a href="forget_password1.html" style="color: #DA9D6F;">reset here</a>
+              </p>
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btnForm">Login</button>
+                  </div>
+            </form>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("loginformvisitor").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+
+      var form = event.target;
+      var formData = new FormData(form);
+
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+      var reqData = JSON.stringify(jsonData)
+      console.log("jsonData",jsonData);
+      $.ajax({
+        url: '/api/login',
+        type: 'post',
+        data: jsonData,
+        success: function(data){ 
+          console.log("response",data)
+          if (data.success) {
+            Swal.fire(
+            'You have logged in!',
+            data.message,
+            'success'
+            )
+            console.log("response_data",data.response_data)
+            localStorage.setItem("USER_TYPE",data.response_data.user_type);
+            localStorage.setItem("USER_ID",data.response_data._id);
+            localStorage.setItem("USER_EMAIL",data.response_data.email);
+            localStorage.setItem("USER_DOB",data.response_data.dob);
+            localStorage.setItem("USER_FIRSTNAME",data.response_data.firstName);
+            localStorage.setItem("USER_LASTNAME",data.response_data.lastName);
+            localStorage.setItem("USER_PHONE",data.response_data.phoneNumber);
+            let USER_TYPE = localStorage.getItem("USER_TYPE");
+            let USER_ID = localStorage.getItem("USER_ID");
+            let USER_EMAIL = localStorage.getItem("USER_EMAIL");
+            let USER_DOB = localStorage.getItem("USER_DOB");
+            let USER_FIRSTNAME = localStorage.getItem("USER_FIRSTNAME");
+            let USER_LASTNAME = localStorage.getItem("USER_LASTNAME");
+            let USER_PHONE = localStorage.getItem("USER_PHONE");
+            window.location.href = "/LoginSuccess";
+          } else {
+            Swal.fire({
+            title: 'Error!',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+            console.log("response_data",data.response_data)
+          }
+        }
+      });
+
+    });
+    document.getElementById("loginformserviceprovider").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+
+      var form = event.target;
+      var formData = new FormData(form);
+
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+      var reqData = JSON.stringify(jsonData)
+      console.log("jsonData",jsonData);
+      $.ajax({
+        url: '/api/login',
+        type: 'post',
+        data: jsonData,
+        success: function(data){ 
+          console.log("response",data)
+          if (data.success) {
+            Swal.fire(
+            'You have logged in!',
+            data.message,
+            'success'
+            )
+            console.log("response_data",data.response_data)
+            localStorage.setItem("USER_TYPE",data.response_data.user_type);
+            localStorage.setItem("USER_ID",data.response_data._id);
+            localStorage.setItem("USER_EMAIL",data.response_data.email);
+            localStorage.setItem("USER_DOB",data.response_data.dob);
+            localStorage.setItem("USER_FIRSTNAME",data.response_data.firstName);
+            localStorage.setItem("USER_LASTNAME",data.response_data.lastName);
+            localStorage.setItem("USER_PHONE",data.response_data.phoneNumber);
+            let USER_TYPE = localStorage.getItem("USER_TYPE");
+            let USER_ID = localStorage.getItem("USER_ID");
+            let USER_EMAIL = localStorage.getItem("USER_EMAIL");
+            let USER_DOB = localStorage.getItem("USER_DOB");
+            let USER_FIRSTNAME = localStorage.getItem("USER_FIRSTNAME");
+            let USER_LASTNAME = localStorage.getItem("USER_LASTNAME");
+            let USER_PHONE = localStorage.getItem("USER_PHONE");
+            window.location.href = "/LoginSuccess";
+
+          } else {
+            Swal.fire({
+            title: 'Error!',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+
+            console.log("response_data",data.response_data)
+          }
+        }
+      });
+    });
+    function CustomAlert(){
+  this.alert = function(message,title){
+    document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
+
+    let dialogoverlay = document.getElementById('dialogoverlay');
+    let dialogbox = document.getElementById('dialogbox');
+    
+    let winH = window.innerHeight;
+    dialogoverlay.style.height = winH+"px";
+    
+    dialogbox.style.top = "100px";
+
+    dialogoverlay.style.display = "block";
+    dialogbox.style.display = "block";
+    
+    document.getElementById('dialogboxhead').style.display = 'block';
+
+    if(typeof title === 'undefined') {
+      document.getElementById('dialogboxhead').style.display = 'none';
+    } else {
+      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
+    }
+    document.getElementById('dialogboxbody').innerHTML = message;
+    document.getElementById('dialogboxfoot').innerHTML = '<button class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+  }
+  
+  this.ok = function(){
+    document.getElementById('dialogbox').style.display = "none";
+    document.getElementById('dialogoverlay').style.display = "none";
+  }
+}
+    
+  </script>
+
+
+    <%- include('../partials/footer'); %>
+
+
+</body>
+
+</html>

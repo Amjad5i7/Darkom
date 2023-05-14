@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body>
+    <header>
+        <!--HEADER NAV-BAR | IF USER REGISTER OR NOT-->
+        <% if (loggedIn) { %>
+            <%- include('../partials/headerLogin'); %>
+        <% } else { %>
+            <%- include('../partials/header'); %>
+        <% } %>
+    </header>
+
+
+    <!--START FIRST SECTION -->
+    <br><br><br>
+    <div class="About_section" id="About_section">
+      
+      <div class="container">
+
+        <div class="row">
+          <h1 id="about">About Darkom</h1><br><br><br><br>
+                    
+          <div class="col-1"></div>
+
+            <div class="col-md-4">
+              <P id="about_p1">Your all-in-one travel companion to explore the hidden gems of <b>Saudi Arabia! </b>
+                        With our user-friendly website, we aim to make your travel experience hassle-free and economical. 
+                        Whether you're visiting Riyadh, Jeddah, Alula, or Neom, Darkom has got you covered. Our website offers 
+                        a variety of tools to help you plan your trip, such as browsing through different 
+                        service providers, viewing their profiles, and confirming your booking through registration and payment method. 
+                        But that's not all! You can also check previous customers' feedback and ratings to make an informed decision. At <b>Darkom</b>, 
+                        we understand the importance of a <b>memorable trip</b>, and that's why we strive to provide the best travel solutions. 
+                        Whether you're looking for adventure, relaxation, or cultural experiences, we've got something for everyone. </p>
+                        
+              <p id="about_p2" ><b>Remember, at Darkom, "AlDar Darkom" - The home is yours!</b></p>
+            </div>
+                  
+            <div class="col-md-4"> 
+              <a class="about_darkom"><img onmouseover="this.src='images/about_1_colored.jpeg'" onmouseout="this.src='images/about_1.jpeg'" id="about_image_hover" src="images/about_1.jpeg" alt="image"></a>
+            </div>
+
+        </div>
+                  
+      </div>
+
+    </div>
+    <br><br><br><br>
+    <!-- END FIRST SECTION -->
+
+
+    <!--START TEAM SECTION -->
+    <div class="responsive-container-block outer-container">
+      <div class="responsive-container-block inner-container">
+        <p class="text-blk section-head-text">
+          Our Team
+        </p><br><br><br><br>
+        
+        <div class="responsive-container-block">
+          
+          <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
+            <div class="team-card">
+              <div class="img-wrapper">
+                <img class="team-img" src="images/alt_logo-08.png" style="background-color: white;" ><br><br><br>
+              </div>
+              <p class="text-blk name">
+                Amjad Alhakbani
+              </p>
+              <p class="text-blk position">
+                Software Engineer
+              </p>
+             
+              <a href="mailto:219410306@psu.edu.sa"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+
+          <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
+            <div class="team-card">
+              <div class="img-wrapper">
+                <img class="team-img" src="images/alt_logo-09.png" style="background-color: white;" ><br><br><br>
+              </div>
+              <p class="text-blk name">
+                Dana Alsalem
+              </p>
+              <p class="text-blk position">
+                Software Engineer | Cybersecurity
+              </p>
+              <a href="mailto:218410728@psu.edu.sa"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+
+          <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
+            <div class="team-card">
+              <div class="img-wrapper">
+                <img class="team-img" src="images/alt_logo-13.png" style="background-color: white;" ><br><br><br>
+              </div>
+              <p class="text-blk name">
+                Fahdah Bin Muqrin
+              </p>
+              <p class="text-blk position">
+                Software Engineer 
+              </p>
+              <a href="mailto:218410176@psu.edu.sa"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+
+          <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
+            <div class="team-card">
+              <div class="img-wrapper">
+                <img class="team-img" src="images/alt_logo-11.png" style="background-color: white;" ><br><br><br>
+              </div>
+              <p class="text-blk name">
+                Maha Alsubaie
+              </p>
+              <p class="text-blk position">
+                Software Engineer | Cybersecurity
+              </p>
+              <a href="mailto:219410490@psu.edu.sa"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--END TEAM SECTION -->
+
+
+    <!--FOOTER SECTION-->
+    <%- include('../partials/footer'); %>
+
+</body>
+</html>

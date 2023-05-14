@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body>
+
+    <header>
+        <% if (loggedIn) { %>
+            <%- include('../partials/headerLogin'); %>
+         <% } else { %>
+            <%- include('../partials/header'); %>
+         <% } %>
+      
+    </header>
+        <!-- Start add Plan -->
+
+        <!-- Add Activity Title-->
+        <div class="container">
+            <div class="row p-4">
+                <div class="col-12 mb-4">
+                    <h2 class="text-center">Add Activity</h2>
+                    
+                </div>
+        <!-- End Add Activity Title-->
+
+        <!-- Plan Name -->
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <form id="addActivityForm" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Activity Name</label>
+                            <input type="hidden" class="form-control" name="providerId" id="providerId" value="<%= user._id %>">
+                            <input type="hidden" class="form-control" name="serviceType" id="serviceType" value="activity">
+                            <input type="text" required class="form-control" name="serviceName" id="serviceName" placeholder="Activity Name">
+                        </div>
+        <!-- End Plan Name -->
+
+        <!-- Plan Description -->
+                        <div class="mb-3">
+                            <label for="desc" class="form-label">Description</label>
+                            <textarea  class="form-control" name="description" id="description" placeholder="Description" rows="5" required></textarea>
+                        </div>
+        <!-- End Plan Description -->
+
+        <!-- Max. Visitor -->
+                        <div class="mb-3">
+                            <label for="MaxNum" class="form-label">Max. Number of Visitors</label>
+                            <input type="number" class="form-control" name="numOfVisitors" id="numOfVisitors" placeholder="Max. Visitors" required>
+                        </div>
+        <!-- End Max. Visitor -->
+
+
+        <!-- Plan Available Dates -->
+                        <div class="mb-3">
+                            <h7>Available Dates</h7><br>
+                            <label for="days" class="form-label">From</label>
+                            <input required type="date" class="form-control" name="fromDate" value="01/01/2023 - 01/15/2023"  id="fromDate" placeholder="Date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="days" class="form-label">To</label>
+                            <input required type="date" class="form-control" name="toDate" value="01/01/2023 - 01/15/2023"  id="toDate" placeholder="Date">
+                        </div>
+        <!-- End Plan Available Dates -->
+
+        <!-- Plan Price -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">$ Price</label>
+                            <input type="number" class="form-control" name="price" id="price" placeholder="Price" required>
+                        </div>
+        <!-- End Plan Price -->
+
+        <!-- Plan Images -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Images</label>
+                            <input type="file" class="form-control" name="activityImages" id="image" placeholder="Images">
+                        </div>
+        <!-- End Plan Images -->
+
+        <!-- Uploud Plan Button -->
+                        <button type="submit" class="btnForm" style="margin-left: 700px;">Upload Activity</button>
+                    </form>
+        <!-- End Uploud Activity Button -->
+                </div>
+            </div>
+        </div>
+
+        <!-- End of Add Plan  -->
+
+        <!-- Date Range java script src -->     
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <!-- End Date Range java script src -->     
+
+        <!-- java script -->
+        <script>
+            $(document).ready(function() {
+                $('#addActivityForm').submit(function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // Create FormData object and append form data
+                    var formData = new FormData(this);
+                    for (var pair of formData.entries()) {
+                    console.log(pair[0] + ', ' + pair[1]);
+                    }
+                    // Send AJAX request to the server
+                    $.ajax({
+                    url: '/api/addServices',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Handle success response
+                        console.log('Image uploaded successfully',response);
+                        if (response.success) {
+                            alert(response.message)
+                            window.location.href = "/services";
+                        }
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        console.log('Error uploading image',error);
+                    }
+                    });
+                });
+            });
+
+        // Date range function
+            $(function() {
+                $('input[name="daterange"]').daterangepicker();
+            });
+
+        // a counter for activity IDs
+            let counter  = 1 ;
+
+        // a function to add a unique id for each activity using the counter    
+            function addNew() {
+
+                let activity  =  '<div class="row" id="act'+counter+'">\n' +'<div class="mb-3 col-10">\n' + '<input type="text" class="form-control" id="activities" name="activities[]" placeholder="Activity">\n' 
+                    +'</div>\n'+'<div class="col-2">\n' +'<button onclick="del('+counter+')" type="button" class="btn btn-danger ">Delete</button>\n' +'</div>\n' + '</div>' ;
+
+        // to add all new activities to all-activities
+                $('#all-activities').append(activity);
+                counter++;
+            }
+
+        // to delete the specified activity 
+            function del(counter) {
+                $('#act'+counter).remove();
+            }
+        </script>
+        <!-- End java script -->
+
+
+  <%- include('../partials/footer'); %>
+
+
+</body>
+</html>

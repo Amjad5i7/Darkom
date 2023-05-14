@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://js.stripe.com/v3/"></script>
+    <!--script for check in/out date -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <%- include('../partials/head'); %>
+  <style>.card-element {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }</style>
+</head>
+<body >
+
+    <header>
+        <% if (loggedIn) { %>
+            <%- include('../partials/headerLogin'); %>
+         <% } else { %>
+            <%- include('../partials/header'); %>
+         <% } %>
+      
+    </header>
+<!--START RESERVATION SECTION-->
+<div class="container mt-4">
+    <div class="row">
+        <h2 class="text-center">Reservation</h2>
+    </div>
+</div><hr>
+
+<div class="container">
+    <div class="row p-4">
+        <div class="col-2"></div>
+        <div class="col-8">
+            
+            <form id="payment-form">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Visitor Name</label>
+                  <input type="hidden" name="images" id="images" value="<%= data.images %>">
+                  <input type="hidden" name="serviceName" id="serviceName" value="<%= data.serviceName %>">
+                  <input type="hidden" name="address" id="address" value="<%= data.address %>">
+                  <input type="hidden" name="providerId" id="providerId" value="<%= data.providerId %>">
+                  <input type="hidden" name="serviceType" id="serviceType" value="<%= data.serviceType %>">
+                  <input type="hidden" name="amount" id="amount" value="<%= data.price %>">
+                  <input type="hidden" name="reservationId" id="reservationId" value="<%= data.reservationId %>">
+                  <input type="hidden" name="visitorEmail" id="visitorEmail" value="<%= data.email %>">
+                  <input type="text" class="form-control" name="name" id="name" value="<%= data.firstName + ' ' + data.lastName %>" placeholder="Enter Name" required><br>
+                  <label for="date" class="form-label">Choose Date (<%= data.fromDate + ' to ' + data.toDate %>)</label>
+                  <input type="date" name="datefilter" id="datefilter" value="01/01/2018 - 01/15/2018" style="color:#DA9D6F; width: 100%;" required><br><br>
+                  <label for="quantity" class="form-label">No. of Visitors (Max <%= data.numOfVisitors %>)</label>
+                  <input type="number" class="form-control" name="number" id="number" placeholder="Enter No. of Visitors" min="1" max="8" required><br>
+                  <label for="textbox" class="form-label">Add Details</label>
+                  <textarea class="form-control" rows="4" cols="50" name="textbox" id="textbox" placeholder="Add details" required></textarea>
+                  <label for="textbox" class="form-label">Card Details</label>
+                </div>
+                <div id="card-element" class="mb-3">
+                  <!-- Stripe card element will be inserted here -->
+                </div>
+                <div id="card-errors" role="alert"></div>
+                <button type="submit">Pay</button>
+              </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+   $(function() {
+  $('input[name="datefilter"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+$(function() {
+    const stripe = Stripe('pk_test_51N4WoVI2yiufpT7j7x2YT8Xdvk5U7pOIRZyakYWUzdR4gLIA9HTlXQ6y0Ax7yJQJa09x1kZH2Zny0Ov8Q17YyUiA00bQbc8PwJ');
+    const elements = stripe.elements();
+      const cardElement = elements.create('card', {
+        style: {
+          base: {
+            fontSize: '16px',
+          },
+        },
+        classes: {
+          base: 'form-control',
+        },
+        hidePostalCode: true,
+      });
+
+      cardElement.mount('#card-element');
+
+      cardElement.addEventListener('change', function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+    const form = document.getElementById('payment-form');
+  form.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const amount = document.getElementById('amount').value;
+    const reservationId = document.getElementById('reservationId').value;
+    const visitorEmail = document.getElementById('visitorEmail').value;
+    const name = document.getElementById('name').value;
+    const date = document.getElementById('datefilter').value;
+    const quantity = document.getElementById('number').value;
+    const details = document.getElementById('textbox').value;
+    const providerId = document.getElementById('providerId').value;
+    const serviceType = document.getElementById('serviceType').value;
+    const serviceName = document.getElementById('serviceName').value;
+    const address = document.getElementById('address').value;
+    const serviceImage = document.getElementById('images').value;
+    
+
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    });
+
+
+if (error) {
+  // Handle error
+  const displayError = document.getElementById('card-errors');
+  if (error.code === 'missing' && error.param === 'card') {
+      displayError.textContent = 'Please provide valid card details.';
+  } else {
+      displayError.textContent = error.message;
+  }
+} else {
+  // Payment method successfully created, proceed with form submission
+  const paymentObj = {
+    paymentMethodId: paymentMethod.id,
+    amount: amount,
+    reservationId: reservationId,
+    visitorEmail: visitorEmail,
+    name: name,
+    date: date,
+    quantity: quantity,
+    details: details,
+    providerId:providerId,
+    serviceType:serviceType,
+    serviceName:serviceName,
+    address:address,
+    serviceImage:serviceImage
+  };
+
+  console.log("paymentObj", paymentObj);
+
+  await $.ajax({
+    url: '/api/testPayment',
+    type: 'post',
+    data: JSON.stringify(paymentObj),
+    contentType: 'application/json', // Add this line to set the request content type
+    success: function(data) {
+      Swal.fire(
+            'Payment',
+            data.message,
+            'success',
+            'OK'
+            ).then(function(){
+            console.log("OkButton click");
+            window.location.href = "/";
+      });
+      // Handle success response
+    },
+    error: function(error) {
+      // Handle error response
+    }
+  });
+
+}
+
+
+  });
+
+  function stripeTokenHandler(paymentMethod,amount,reservationId,visitorEmail, name, date, quantity, details) {
+    const formData = new FormData();
+  formData.append('paymentMethodId', paymentMethod.id);
+  formData.append('amount', amount);
+  formData.append('reservationId', reservationId);
+  formData.append('visitorEmail', visitorEmail);
+  formData.append('name', name);
+  formData.append('date', date);
+  formData.append('quantity', quantity);
+  formData.append('details', details);
+  $.ajax({
+        url: '/api/testPayment',
+        type: 'post',
+        data: formData,
+        success: function(data){ 
+          console.log("response",data)
+          if (data.success) {
+            Swal.fire(
+            'Password link sent',
+            data.message,
+            'success',
+            'OK'
+            )
+            console.log("response_data",data.response_data)
+            
+          } else {
+            Swal.fire({
+            title: 'Error',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+            })
+
+            console.log("response_data",data.response_data)
+          }
+        }
+      });
+  }
+  document.addEventListener('keydown', function (event) {
+  if (event.key === 'Backspace') {
+    event.preventDefault();
+  }
+});
+
+});
+</script>
+
+
+  <%- include('../partials/footer'); %>
+
+</body>
+</html>
