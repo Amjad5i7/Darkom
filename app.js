@@ -148,3 +148,5 @@ module.exports.httpServer = server.listen(port, () => {
   console.log("Listening on 'http://127.0.0.1:" + port);
 });
 
+mongoose.set('strictQuery', false);
+
